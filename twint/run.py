@@ -104,10 +104,10 @@ class Twint:
         await self.Feed()
         if self.config.User_full:
             logme.debug(__name__+':Twint:follow:userFull')
-            self.count += await get.Multi(self.feed, self.config, self.conn)
+            self.count += await get.Multi(self.feed[0:self.config.Limit], self.config, self.conn)
         else:
             logme.debug(__name__+':Twint:follow:notUserFull')
-            for user in self.feed:
+            for user in self.feed[0:self.config.Limit]:
                 self.count += 1
                 username = user.find("a")["name"]
                 await output.Username(username, self.config, self.conn)
@@ -115,16 +115,16 @@ class Twint:
     async def favorite(self):
         logme.debug(__name__+':Twint:favorite')
         await self.Feed()
-        self.count += await get.Multi(self.feed, self.config, self.conn)
+        self.count += await get.Multi(self.feed[0:self.config.Limit], self.config, self.conn)
 
     async def profile(self):
         await self.Feed()
         if self.config.Profile_full:
             logme.debug(__name__+':Twint:profileFull')
-            self.count += await get.Multi(self.feed, self.config, self.conn)
+            self.count += await get.Multi(self.feed[0:self.config.Limit], self.config, self.conn)
         else:
             logme.debug(__name__+':Twint:notProfileFull')
-            for tweet in self.feed:
+            for tweet in self.feed[0:self.config.Limit]:
                 self.count += 1
                 await output.Tweets(tweet, self.config, self.conn)
 
@@ -132,10 +132,10 @@ class Twint:
         await self.Feed()
         if self.config.Location:
             logme.debug(__name__+':Twint:tweets:location')
-            self.count += await get.Multi(self.feed, self.config, self.conn)
+            self.count += await get.Multi(self.feed[0:self.config.Limit], self.config, self.conn)
         else:
             logme.debug(__name__+':Twint:tweets:notLocation')
-            for tweet in self.feed:
+            for tweet in self.feed[0:self.config.Limit]:
                 self.count += 1
                 await output.Tweets(tweet, self.config, self.conn)
 
