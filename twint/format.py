@@ -54,7 +54,6 @@ def Tweet(config, t):
 
 def User(_format, u):
     if _format:
-        logme.debug(__name__+':User:Format')
         output = _format.replace("{id}", str(u.id))
         output = output.replace("{name}", u.name)
         output = output.replace("{username}", u.username)
@@ -76,7 +75,6 @@ def User(_format, u):
         else:
             output = output.replace("{background_image}", "")
     else:
-        logme.debug(__name__+':User:notFormat')
         output = f"{u.id} | {u.name} | @{u.username} | Private: "
         output += f"{u.is_private} | Verified: {u.is_verified} |"
         output += f" Bio: {u.bio} | Location: {u.location} | Url: "

@@ -20,6 +20,7 @@ def addExt(base, objType, fType):
 def Text(entry, f):
     print(entry.replace('\n', ' '), file=open(f, "a", encoding="utf-8"))
 
+
 def Type(config):
     if config.User_full:
         _type = "user"
